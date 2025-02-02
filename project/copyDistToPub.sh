@@ -34,7 +34,7 @@ print_bar()
   echo -e $bar
 )
 
-main()
+copy()
 (
   if ! [ -d "./dist/" ]; then
     print_error './dist/が存在しません'
@@ -59,4 +59,4 @@ main()
   echo 'completed'
 )
 
-main
+copy
