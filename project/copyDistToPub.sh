@@ -50,7 +50,7 @@ main()
   for file in './dist/'*
   do
     cp -r "$file" "./target/"
-    percent=$(( $i / $count_files * 100 ))
+    percent=$(( i * 100 / count_files ))
     print_bar $percent
     (( i++ ))
   done
