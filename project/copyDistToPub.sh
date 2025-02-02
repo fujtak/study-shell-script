@@ -36,20 +36,22 @@ print_bar()
 
 copy()
 (
-  if ! [ -d "./dist/" ]; then
-    print_error './dist/が存在しません'
+  dir_base='./dist/'
+  dir_target='./target/'
+
+  if ! [ -d $dir_base ]; then
+    print_error "$dir_base が存在しません"
     exit 1
-  elif ! [ -d "./target/" ]; then
-    print_error './target/が存在しません'
+  elif ! [ -d $dir_target ]; then
+    print_error "$dir_target が存在しません"
     exit 1
   fi
 
-  count_files=`find ./dist/ -type f | wc -l`
+  count_files=`find $dir_base -type f | wc -l`
 
   i=1
-  for file in './dist/'*
-  do
-    cp -r "$file" "./target/"
+  for file in $dir_base*; do
+    cp -r $file $dir_target
     percent=$(( i * 100 / count_files ))
     print_bar $percent
     (( i++ ))
