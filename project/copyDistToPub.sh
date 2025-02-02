@@ -1,15 +1,25 @@
-#!/bin/sh
+#!/bin/bash
 
-# 絶対パスを取得
-DIR=$(dirname $0)
+print_error()
+(
+  message=$1
+  printf "\033[31m%s\033[m\n" $message
+)
 
-# コピー
-if cp -R "${DIR}/dist/"* "${DIR}/repo/"
-then
-  echo 'コピーが成功しました'
-  exit 0
-else
-  COLOR_RED='31'
-  printf "\033[${COLOR_RED}m%s\033[m\n" 'コピーが失敗しました！'
-  exit 1
-fi
+main()
+(
+  if ! [ -d "./dist/" ]; then
+    print_error './dist/が存在しません'
+    exit 1
+  elif ! [ -d "./target/" ]; then
+    print_error './target/が存在しません'
+    exit 1
+  fi
+
+  for file in './dist/'*
+  do
+    cp -r $file './target/'
+  done
+)
+
+main
