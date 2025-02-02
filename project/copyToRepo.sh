@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if cp -R ./dist ./repo
+if cp -R ./dist/* ./repo
 then
   echo 'コピーに成功しました'
 else
