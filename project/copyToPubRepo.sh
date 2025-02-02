@@ -6,9 +6,10 @@ DIR=$(dirname $0)
 # コピー
 if cp -R "${DIR}/dist/"* "${DIR}/repo/"
 then
-  echo 'コピーに成功しました'
+  echo 'コピーが成功しました'
   exit 0
 else
-  echo 'コピーに失敗しました'
+  COLOR_RED='31'
+  printf "\033[${COLOR_RED}m%s\033[m\n" 'コピーが失敗しました！'
   exit 1
 fi
