@@ -46,7 +46,7 @@ main()
 
   count_files=`find ./dist/ -type f | wc -l`
 
-  i=0
+  i=1
   for file in './dist/'*
   do
     cp -r "$file" "./target/"
