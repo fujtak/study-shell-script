@@ -36,8 +36,8 @@ print_bar()
 
 copy()
 (
-  dir_base='./dist/'
-  dir_target='./target/'
+  dir_base=$1
+  dir_target=$2
 
   if ! [ -d $dir_base ]; then
     print_error "$dir_base が存在しません"
@@ -58,7 +58,7 @@ copy()
   done
 
   echo -e "\r"
-  echo 'completed'
+  echo "$dir_base から $dir_target へコピーが完了しました"
 )
 
-copy
+copy './dist/' './target/'
