@@ -1,21 +1,20 @@
 #!/bin/bash
 
-print_error()
+error()
 (
   if [ $# -ne 1 ]; then
-    print_error "エラー: 引数に過不足があります。第一引数にエラーメッセージとして出力したい文字列を入力してください。"
-    exit 1
+    error "エラー: 引数に過不足があります。第一引数にエラーメッセージとして出力したい文字列を入力してください。"
   fi
 
   message=$1
   printf "\033[31m%s\033[m\n" $message
+  exit 1
 )
 
 print_bar()
 (
   if [ $# -ne 1 ]; then
-    print_error "エラー: 引数に過不足があります。第一引数に進捗のパーセンテージを数値で入力してください。"
-    exit 1
+    error "エラー: 引数に過不足があります。第一引数に進捗のパーセンテージを数値で入力してください。"
   fi
 
   percent=$1
@@ -47,26 +46,22 @@ print_bar()
 copy()
 (
   if [ $# -ne 2 ]; then
-    print_error "エラー: 引数に過不足があります。第一引数にコピー元のディレクトリのパス、第二引数にコピー先のディレクトリのパスを入力してください。"
-    exit 1
+    error "エラー: 引数に過不足があります。第一引数にコピー元のディレクトリのパス、第二引数にコピー先のディレクトリのパスを入力してください。"
   fi
 
   dir_base=$1
   dir_target=$2
 
   if ! [ -d $dir_base ]; then
-    print_error "エラー: $dir_base ディレクトリが存在しません。"
-    exit 1
+    error "エラー: $dir_base ディレクトリが存在しません。"
   elif ! [ -d $dir_target ]; then
-    print_error "エラー: $dir_target ディレクトリが存在しません。"
-    exit 1
+    error "エラー: $dir_target ディレクトリが存在しません。"
   fi
 
   count_files=`find $dir_base -type f | wc -l`
 
   if [ $count_files -le 0 ]; then
-    print_error "エラー: $dir_base ディレクトリ配下にファイルが存在しません。"
-    exit 1
+    error "エラー: $dir_base ディレクトリ配下にファイルが存在しません。"
   fi
 
   echo "コピー開始 $dir_base => $dir_target"
