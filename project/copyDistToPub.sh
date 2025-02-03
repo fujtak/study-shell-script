@@ -40,12 +40,14 @@ copy()
   dir_target=$2
 
   if ! [ -d $dir_base ]; then
-    print_error "$dir_base が存在しません"
+    print_error "エラー: $dir_base ディレクトリは存在しません"
     exit 1
   elif ! [ -d $dir_target ]; then
-    print_error "$dir_target が存在しません"
+    print_error "エラー: $dir_target ディレクトリは存在しません"
     exit 1
   fi
+
+  echo "コピー開始 $dir_base => $dir_target"
 
   count_files=`find $dir_base -type f | wc -l`
 
@@ -58,7 +60,7 @@ copy()
   done
 
   echo -e "\r"
-  echo "$dir_base から $dir_target へコピーが完了しました"
+  echo "コピー完了"
 )
 
 copy './dist/' './target/'
